@@ -1,4 +1,4 @@
-FROM python:3.8.6
+FROM python:3.8.6 AS prod
 
 # Add files
 RUN mkdir /server
@@ -13,3 +13,8 @@ RUN pip install -r requirements.txt
 EXPOSE 80/tcp
 ENV SERVER_PORT=80
 CMD ["python", "-m", "example.server"]
+
+FROM prod AS tests
+
+ADD test /server/test
+RUN ["python", "-m", "tornado.testing", "test.example.server"]

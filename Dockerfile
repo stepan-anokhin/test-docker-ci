@@ -9,6 +9,10 @@ WORKDIR /server
 # Install dependencies
 RUN pip install -r requirements.txt
 
+# Label the image with commit information
+ARG GIT_HASH=unspecified
+LABEL git_hash=$GIT_HASH
+
 # Start server
 EXPOSE 80/tcp
 ENV SERVER_PORT=80

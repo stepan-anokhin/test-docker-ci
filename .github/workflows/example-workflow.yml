@@ -13,4 +13,4 @@ jobs:
         SECRET: ${{ secrets.EXAMPLE_SECRET }}
       run: echo "$SECRET"
     - name: Example of Context Usage
-      run: echo "${{ github.event_name }}"
+      run: echo "${{ github.event_name }}${{ github.ref == 'refs/heads/master' && '' || '-dev' }}"

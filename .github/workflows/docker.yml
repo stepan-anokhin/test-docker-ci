@@ -1,4 +1,4 @@
-name: Example Workflow
+name: Docker Workflow
 
 on:
   push:
@@ -17,14 +17,15 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: false
-          context: ./
+          context: .
           file: ./Dockerfile
           target: tests
       - name: Push Image
         uses: docker/build-push-action@v2
         with:
           push: true
-          context: ./
+          tags: sanokhin/ci-example
+          context: .
           file: ./Dockerfile
           target: prod
           build-args: |

@@ -9,4 +9,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Use Example Secret
-      run: echo "${{ secrets.EXAMPLE_SECRET }}"
+      env:
+        SECRET: ${{ secrets.EXAMPLE_SECRET }}
+      run: echo "$SECRET"

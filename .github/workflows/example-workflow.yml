@@ -12,3 +12,5 @@ jobs:
       env:
         SECRET: ${{ secrets.EXAMPLE_SECRET }}
       run: echo "$SECRET"
+    - name: Example of Context Usage
+      run: echo "${{ github.event_name }}"

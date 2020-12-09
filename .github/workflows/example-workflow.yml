@@ -14,3 +14,14 @@ jobs:
       run: echo "$SECRET"
     - name: Example of Context Usage
       run: echo "${{ github.event_name }}${{ github.ref != 'refs/heads/master' && '-dev' || '' }}"
+    - name: Investigate /usr/local/share/boost
+      run: |
+        ls -la /usr/local/share/boost
+        du -hs /usr/local/share/boost/*
+        du -hs /usr/local/share/boost
+    - name: Investigate AGENT_TOOLSDIRECTORY
+      run: |
+        echo "$AGENT_TOOLSDIRECTORY"
+        ls -la "$AGENT_TOOLSDIRECTORY"
+        du -hs "$AGENT_TOOLSDIRECTORY/*"
+        du -hs "$AGENT_TOOLSDIRECTORY"

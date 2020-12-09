@@ -23,5 +23,8 @@ jobs:
       run: |
         echo "$AGENT_TOOLSDIRECTORY"
         ls -la "$AGENT_TOOLSDIRECTORY"
-        du -h "$AGENT_TOOLSDIRECTORY"
         du -hs "$AGENT_TOOLSDIRECTORY"
+        df -h
+        rm -rf "$AGENT_TOOLSDIRECTORY"
+        df -h
+

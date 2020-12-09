@@ -23,5 +23,5 @@ jobs:
       run: |
         echo "$AGENT_TOOLSDIRECTORY"
         ls -la "$AGENT_TOOLSDIRECTORY"
-        du -hs "$AGENT_TOOLSDIRECTORY/*"
+        du -h "$AGENT_TOOLSDIRECTORY"
         du -hs "$AGENT_TOOLSDIRECTORY"

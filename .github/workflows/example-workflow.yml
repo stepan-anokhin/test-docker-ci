@@ -21,7 +21,7 @@ jobs:
           script: |
             console.log(context);
             console.log(context.github);
-            const short = context.github.sha.substr(0, 7);
+            const short = context.sha.substr(0, 7);
             core.setOutput('short_sha', short);
       - name: Example of various context variables
         run: |

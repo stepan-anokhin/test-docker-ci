@@ -19,7 +19,7 @@ jobs:
         id: get_revision
         with:
           script: |
-            const short = context.github.sha.substr(0, 7);
+            const short = github.sha.substr(0, 7);
             core.setOutput('short_sha', short);
       - name: Example of various context variables
         run: |

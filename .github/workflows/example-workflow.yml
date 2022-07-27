@@ -23,11 +23,14 @@ jobs:
             console.log(context.github);
             const short = context.sha.substr(0, 7);
             core.setOutput('short_sha', short);
-      - name: Example of various context variables
+      - &example
+        name: Example of various context variables
         run: |
           echo "github.ref_name = '${{ github.ref_name }}'"
           echo "github.sha = '${{ github.sha }}'"
           echo "steps.get_revision.outputs.short_sha = '${{ steps.get_revision.outputs.short_sha }}'"
+      - <<: *example
+        name: Repeated example of context variables.
       - name: Investigate /usr/local/share/boost
         run: |
           ls -la /usr/local/share/

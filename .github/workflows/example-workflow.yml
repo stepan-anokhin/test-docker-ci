@@ -14,9 +14,13 @@ jobs:
         run: echo "$SECRET"
       - name: Example of Context Usage
         run: echo "${{ github.event_name }}${{ github.ref != 'refs/heads/master' && '-dev' || '' }}"
-      - name: Get Short Revision
-        run: echo "##[set-output name=short_sha;]$(echo `git rev-parse --short "$GITHUB_SHA"`)"
+      - name: Example of github script (JS) with outputs
+        uses: actions/github-script@v6
         id: get_revision
+        with:
+          script: |
+            const short = context.github.sha.substr(0, 7);
+            core.setOutput('short_sha', short);
       - name: Example of various context variables
         run: |
           echo "github.ref_name = '${{ github.ref_name }}'"

@@ -8,28 +8,31 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - name: Use Example Secret
-      env:
-        SECRET: ${{ secrets.EXAMPLE_SECRET }}
-      run: echo "$SECRET"
-    - name: Example of Context Usage
-      run: echo "${{ github.event_name }}${{ github.ref != 'refs/heads/master' && '-dev' || '' }}"
-    - name: Example of various context variables
-      run: |
-        echo "github.ref_name = '${{ github.ref_name }}'"
-        echo "github.sha = '${{ github.sha }}'"
-
-    - name: Investigate /usr/local/share/boost
-      run: |
-        ls -la /usr/local/share/
-        du -hs /usr/local/share/*
-        du -hs /usr/local/share/
-    - name: Investigate AGENT_TOOLSDIRECTORY
-      run: |
-        echo "$AGENT_TOOLSDIRECTORY"
-        ls -la "$AGENT_TOOLSDIRECTORY"
-        du -hs "$AGENT_TOOLSDIRECTORY"
-        df -h
-        rm -rf "$AGENT_TOOLSDIRECTORY"
-        df -h
+      - name: Use Example Secret
+        env:
+          SECRET: ${{ secrets.EXAMPLE_SECRET }}
+        run: echo "$SECRET"
+      - name: Example of Context Usage
+        run: echo "${{ github.event_name }}${{ github.ref != 'refs/heads/master' && '-dev' || '' }}"
+      - name: Get Short Revision
+        run: echo "##[set-output name=short_sha;]$(echo `git rev-parse --short "$GITHUB_SHA"`)"
+        id: get_revision
+      - name: Example of various context variables
+        run: |
+          echo "github.ref_name = '${{ github.ref_name }}'"
+          echo "github.sha = '${{ github.sha }}'"
+          echo "steps.get_revision.outputs.short_sha = '${{ steps.get_revision.outputs.short_sha }}'"
+      - name: Investigate /usr/local/share/boost
+        run: |
+          ls -la /usr/local/share/
+          du -hs /usr/local/share/*
+          du -hs /usr/local/share/
+      - name: Investigate AGENT_TOOLSDIRECTORY
+        run: |
+          echo "$AGENT_TOOLSDIRECTORY"
+          ls -la "$AGENT_TOOLSDIRECTORY"
+          du -hs "$AGENT_TOOLSDIRECTORY"
+          df -h
+          rm -rf "$AGENT_TOOLSDIRECTORY"
+          df -h
 

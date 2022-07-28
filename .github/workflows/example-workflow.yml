@@ -24,7 +24,7 @@ jobs:
             const short = context.sha.substr(0, 7);
             core.setOutput('short_sha', short);
       - name: Check my token
-        run: echo "${{ secrets.my_pat }}" | wc
+        run: echo ${{ secrets.my_pat }} | wc
       - name: Example of various context variables
         env:
           CUSTOM: ${{ github.actor }}

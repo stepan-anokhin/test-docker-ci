@@ -51,4 +51,9 @@ jobs:
           df -h
           rm -rf "$AGENT_TOOLSDIRECTORY"
           df -h
-
+      - name: Print on Push
+        if: ${{ github.event_name == 'push' && github.ref_name == 'master' }}
+        run: echo "This is PUSH!"
+      - name: Print on PR
+        if: ${{ github.event_name == 'pull_request' && github.ref_name == 'master' }}
+        run: echo "This is PULL REQUEST!"

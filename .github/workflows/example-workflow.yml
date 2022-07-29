@@ -3,6 +3,8 @@ name: Example Workflow
 on:
   push:
     branches: [ master ]
+  pull_request:
+    branches: [ master ]
 
 jobs:
   build:
@@ -49,4 +51,15 @@ jobs:
           df -h
           rm -rf "$AGENT_TOOLSDIRECTORY"
           df -h
-
+      - name: Print Always
+        run: |
+          echo "github.event_name = ${{ github.event_name }}"
+          echo "github.ref_name = ${{ github.ref_name }}"
+          echo "github.event_name == 'push' && github.ref_name == 'master' = ${{ github.event_name == 'push' && github.ref_name == 'master' }}"
+          echo "github.event_name == 'pull_request' = ${{ github.event_name == 'pull_request' }}"
+      - name: Print on Push
+        if: ${{ github.event_name == 'push' && github.ref_name == 'master' }}
+        run: echo "This is PUSH!"
+      - name: Print on PR
+        if: ${{ github.event_name == 'pull_request' }}
+        run: echo "This is PULL REQUEST!"

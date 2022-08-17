@@ -1,0 +1,21 @@
+name: Experiments
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Example Read File
+        uses: actions/github-script@v6
+        id: get_version
+        with:
+          script: |
+            const fs = require('fs');
+            const version = fs.readFileSync('./version.txt').trim();
+            core.setOutput('version', version);
+      - name: Check my token
+        run: |
+          echo "${{ steps.get_version.outputs.version }}"

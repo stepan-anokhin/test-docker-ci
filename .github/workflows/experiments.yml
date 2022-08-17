@@ -16,7 +16,9 @@ jobs:
         with:
           script: |
             const fs = require('fs');
-            const version = fs.readFileSync('./version.txt').trim();
+            const version = fs.readFileSync('./version.txt', 'utf8');
+            console.log(JSON.stringify([version]));
+            
             core.setOutput('version', version);
       - name: Check my token
         run: |

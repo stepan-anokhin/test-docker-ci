@@ -3,6 +3,8 @@ name: Experiments
 on:
   push:
     branches: [ master ]
+  pull_request:
+    branches: [ master ]
 
 jobs:
   build:
@@ -22,3 +24,8 @@ jobs:
       - name: Check my token
         run: |
           echo "${{ steps.get_version.outputs.version }}"
+
+      - name: Only on Pull Request
+        if: github.event_name == 'pull_request'
+        run: |
+          echo "Hello from the pull request!"

@@ -27,3 +27,5 @@ jobs:
           echo "Current dir: $(pwd)"
           echo "Parent dir contents:"
           ls -l ..
+          echo "Grand parent dir:"
+          ls -l ../..

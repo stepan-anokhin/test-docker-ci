@@ -22,3 +22,9 @@ jobs:
       - name: Check my token
         run: |
           echo "${{ steps.get_version.outputs.version }}"
+      - name: Get current dir
+        run: |
+          ls -l .
+          echo "Current dir: $(pwd)"
+          echo "Parent dir contents:"
+          ls -l ..
